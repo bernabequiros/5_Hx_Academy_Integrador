@@ -2,6 +2,8 @@ import hexacta.pageObjects.BackOfficePlatform.RegisterNewUserPage;
 import hexacta.pageObjects.BackOfficePlatform.HomeBackOffice;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,7 +66,7 @@ public class BackOfficeTests extends BaseTest {
     }
 
     @Test
-    public void UnableToCreateANewUserWithoutExamsAssociated() {
+    public void UnableToCreateANewUserWithoutAnyExamAssociated() {
         HomeBackOffice homeBackOffice = new HomeBackOffice();
         homeBackOffice.clickOnCreateUserButton();
         RegisterNewUserPage registerNewUserPage = new RegisterNewUserPage();
@@ -80,6 +82,7 @@ public class BackOfficeTests extends BaseTest {
         homeBackOffice.clickOnCreateUserButton();
         RegisterNewUserPage registerNewUserPage = new RegisterNewUserPage();
         assertFalse("Submit button is enabled.", registerNewUserPage.clickSubmitButtonIsEnabled());
+        
     }
 
 }

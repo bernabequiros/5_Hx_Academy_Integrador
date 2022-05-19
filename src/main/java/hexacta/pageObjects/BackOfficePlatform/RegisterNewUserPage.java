@@ -26,17 +26,9 @@ public class RegisterNewUserPage extends BasePageObject {
     }
 
     public void setUsernameField(String user) {
-        waitUntil(() -> this.usernameFieldIsDisplayed());
+        waitUntil(() -> (new TextBox(usernameField).isDisplayed() ? true : false));
+
         new TextBox(usernameField).write(user);
-    }
-
-    public boolean usernameFieldIsDisplayed() {
-        boolean result = false;
-
-        if (new TextBox(usernameField).isDisplayed()) {
-            result = true;
-        }
-        return result;
     }
 
     public void setPasswordField(String password) {
@@ -68,6 +60,8 @@ public class RegisterNewUserPage extends BasePageObject {
     }
 
     public String getAlertMessage() {
+        waitUntil(() -> (new Link(alertMessageText).isDisplayed() ? true:false));
+        
         try {
             return new Link(alertMessageText).getText();
 
@@ -75,7 +69,6 @@ public class RegisterNewUserPage extends BasePageObject {
             return null;
         }
     }
-
 
     public void clickGoBackButton() {
         new Button(goBackButton).click();
@@ -91,17 +84,15 @@ public class RegisterNewUserPage extends BasePageObject {
     }
 
     public boolean clickSubmitButtonIsEnabled() {
-        boolean result = false;
 
-        if (new Button(createUserButton).isEnabled()) {
-            new Button(createUserButton).click(); {
-                result = true; }
-            } 
-        return result;
+        return waitUntil(() -> new Button(createUserButton).isEnabled() ? true : false);
+
     }
 
     public void clickSubmitButton() {
-        waitUntil(() -> this.clickSubmitButtonIsEnabled());
+        this.clickSubmitButtonIsEnabled();
+        new Button(createUserButton).click();
+
     }
 
 }

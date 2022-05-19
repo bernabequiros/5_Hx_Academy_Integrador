@@ -34,22 +34,20 @@ public class HomeInterviewPlatform extends BasePageObject {
         new Button(submitButton).click();
     }
 
-    public String getInvalidLoginMessage() {
-        waitUntil(() -> this.invalidLoginMessageIsDisplayed());
-        try {
-            return new Link(invalidLoginMessage).getText();
-        } catch (Exception e) {
-            return null; 
-        }
-    }
 
 
-    public boolean invalidLoginMessageIsDisplayed() {
-        boolean result = false;
-
-        if (new Link(invalidLoginMessage).isDisplayed()) {
-            result = true;
-        }
-        return result;
+public String getInvalidLoginMessage() {
+    
+    waitUntil(() -> new Link(invalidLoginMessage).isDisplayed()? true : false);
+    
+    try {
+        return new Link(invalidLoginMessage).getText();
+        
+    } catch (Exception e) {
+        return null; 
     }
 }
+
+
+}
+
